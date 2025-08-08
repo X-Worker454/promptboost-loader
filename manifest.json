@@ -1,0 +1,60 @@
+{
+  "manifest_version": 3,
+  "name": "Optimo Prompt Ai",
+  "version": "1.0.0",
+  "description": "Optimize your AI chat prompts across multiple LLM providers using your own API keys. Supports OpenAI, Anthropic, Google, and custom endpoints.",
+  
+  "icons": {
+    "48": "icons/icon48.svg",
+    "96": "icons/icon96.svg"
+  },
+  
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage"
+  ],
+  
+  "host_permissions": [
+    "https://chat.openai.com/*",
+    "https://gemini.google.com/*",
+    "https://claude.ai/*",
+    "https://bard.google.com/*",
+    "https://poe.com/*",
+    "https://character.ai/*",
+    "https://perplexity.ai/*",
+    "https://you.com/*",
+    "https://optimo-prompt-ai-backend.*.workers.dev/*"
+  ],
+  
+  "background": {
+    "service_worker": "background.js"
+  },
+  
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icons/icon48.svg",
+      "96": "icons/icon96.svg"
+    }
+  },
+  
+  "options_page": "options.html",
+  
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chat.openai.com/*",
+        "https://gemini.google.com/*",
+        "https://claude.ai/*",
+        "https://bard.google.com/*",
+        "https://poe.com/*",
+        "https://character.ai/*",
+        "https://perplexity.ai/*",
+        "https://you.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimo Prompt Ai</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="popup-container">
+        <div class="header">
+            <div class="logo">
+                <span class="lightning">⚡</span>
+                <h2>Optimo Prompt Ai</h2>
+            </div>
+        </div>
+        
+        <div class="status-section">
+            <div class="api-status">
+                <div class="status-indicator" id="statusIndicator"></div>
+                <span id="statusMessage">Checking API status...</span>
+            </div>
+            
+            <div class="subscription-info">
+                <span id="subscriptionStatus" style="font-size: 12px; font-weight: 600; color: #2196F3;">Status: Free</span>
+                <button id="syncBtn" style="
+                    margin-left: 8px;
+                    padding: 2px 8px;
+                    font-size: 10px;
+                    background: #f5f5f5;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    color: #666;
+                ">Sync</button>
+            </div>
+            
+            <div class="usage-info">
+                <div class="usage-counter">
+                    <span class="usage-label">Daily Optimizations Used:</span>
+                    <span class="usage-count" id="usageCount">0/15</span>
+                </div>
+                <div class="usage-bar">
+                    <div class="usage-progress" id="usageProgress"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button class="btn-primary" id="settingsBtn">
+                <span>⚙️</span>
+                Settings
+            </button>
+            <button class="btn-secondary" id="premiumBtn" disabled>
+                <span>💎</span>
+                Get Premium
+            </button>
+        </div>
+        
+        <div class="footer">
+            <p class="version">v1.0.0</p>
+        </div>
+    </div>
+    
+    <script src="popup.js"></script>
+</body>
+</html>

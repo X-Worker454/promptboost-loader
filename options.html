@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimo Prompt Ai - Settings</title>
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <span class="lightning">⚡</span>
+                <h1>Optimo Prompt Ai Settings</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Account & Subscription Section -->
+            <section class="section">
+                <h2>Account Information</h2>
+                <div class="card">
+                    <div class="account-info">
+                        <div class="info-row">
+                            <span class="info-label">Installation ID:</span>
+                            <div class="info-value">
+                                <code id="userIdDisplay" style="font-size: 11px; background: #f5f5f5; padding: 4px 8px; border-radius: 4px; user-select: all;">Loading...</code>
+                                <button id="copyUserId" style="margin-left: 8px; padding: 4px 8px; font-size: 10px; background: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer;">Copy</button>
+                            </div>
+                        </div>
+                        <div class="info-row" style="margin-top: 12px;">
+                            <span class="info-label">Subscription:</span>
+                            <div class="info-value">
+                                <span id="subscriptionStatusDisplay" style="font-weight: 600; color: #2196F3;">Freemium</span>
+                                <button id="syncBackend" style="margin-left: 8px; padding: 4px 12px; font-size: 10px; background: #f5f5f5; border: 1px solid #ddd; border-radius: 4px; cursor: pointer;">Sync Status</button>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px; padding: 8px; background: #e3f2fd; border-radius: 6px; border-left: 3px solid #2196f3;">
+                            <div style="font-size: 12px; color: #1976d2; margin-bottom: 4px;">💡 Tip</div>
+                            <div style="font-size: 11px; color: #666;">Use your Installation ID on our website to upgrade to Premium and unlock advanced features.</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Multi-LLM Configuration Section -->
+            <section class="section">
+                <h2 id="llmSectionTitle">LLM Configuration</h2>
+                <div class="card">
+                    <div id="apiKeysList" class="api-keys-list">
+                        <!-- API keys will be loaded here -->
+                    </div>
+                    
+                    <div id="addApiKeyForm" class="add-api-key-form" style="display: none;">
+                        <div class="form-group">
+                            <label for="llmProvider">LLM Provider</label>
+                            <select id="llmProvider">
+                                <option value="openai">OpenAI (GPT-4, GPT-3.5)</option>
+                                <option value="anthropic">Anthropic (Claude)</option>
+                                <option value="google">Google (Gemini)</option>
+                                <option value="deepseek">DeepSeek</option>
+                                <option value="kimi">Kimi</option>
+                                <option value="grok">Grok</option>
+                                <option value="qwen">Qwen</option>
+                                <option value="mistral">Mistral</option>
+                                <option value="glm">GLM 4.5</option>
+                                <option value="llama">Llama</option>
+                                <option value="together">Together AI</option>
+                                <option value="openrouter">OpenRouter</option>
+                                <option value="custom">Custom API Endpoint</option>
+                            </select>
+                            <div class="help-text">
+                                <p>Choose your preferred LLM provider for prompt optimization.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="apiKey">API Key</label>
+                            <div class="input-group">
+                                <input type="password" id="apiKey" placeholder="Enter your API key">
+                                <button type="button" id="toggleApiKey" class="toggle-btn" title="Toggle visibility">👁️</button>
+                            </div>
+                            <div class="help-text" id="apiKeyHelp">
+                                <p>Get your API key from the provider's dashboard.</p>
+                                <p>Your API key is stored locally and never shared with our servers.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="customEndpointGroup" style="display: none;">
+                            <label for="customEndpoint">Custom API Endpoint</label>
+                            <input type="url" id="customEndpoint" placeholder="https://api.example.com/v1/chat/completions">
+                            <div class="help-text">
+                                <p>Enter the full URL for your custom LLM API endpoint.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group" id="modelGroup">
+                            <label for="modelName">Model Name</label>
+                            <input type="text" id="modelName" placeholder="gpt-4">
+                            <div class="help-text">
+                                <p>Specify the model to use (e.g., gpt-4, claude-3-sonnet, gemini-pro).</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="button" id="saveConfig" class="btn-primary">Save API Key</button>
+                            <button type="button" id="testConnection" class="btn-secondary">Test Connection</button>
+                            <button type="button" id="cancelAddKey" class="btn-secondary">Cancel</button>
+                        </div>
+                        <div id="configStatus" class="status-message"></div>
+                    </div>
+                    
+                    <button type="button" id="addApiKeyBtn" class="btn-primary">
+                        <span>➕</span> Add API Key
+                    </button>
+                </div>
+            </section>
+
+            <!-- Prompt Templates Section (Unlimited Only) -->
+            <section class="section templates-section" id="templatesSection" style="display: none;">
+                <h2>Prompt Templates</h2>
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="templatesSearch" placeholder="Search templates...">
+                        <button type="button" id="addTemplate" class="btn-primary">Create Template</button>
+                    </div>
+                    <div id="templatesContainer" class="templates-container">
+                        <div class="empty-state">
+                            <span class="empty-icon">📋</span>
+                            <p>No templates yet. Create your first custom prompt template!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Optimization History Section -->
+            <section class="section history-section">
+                <h2 id="historyTitle">Optimization History (Last 30 entries)</h2>
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="historySearch" placeholder="Search optimization history...">
+                        <button type="button" id="clearHistory" class="btn-secondary">Clear All</button>
+                    </div>
+                    <div id="historyContainer" class="history-container">
+                        <div class="empty-state">
+                            <span class="empty-icon">📝</span>
+                            <p>No optimization history yet. Start optimizing prompts to see them here!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Saved Prompt Library Section -->
+            <section class="section library-section">
+                <h2 id="libraryTitle">Saved Prompt Library (15 slots)</h2>
+                <div class="card">
+                    <div class="search-bar">
+                        <input type="text" id="librarySearch" placeholder="Search saved prompts...">
+                        <button type="button" id="addPrompt" class="btn-primary">Add New Prompt</button>
+                    </div>
+                    <div id="libraryContainer" class="library-container">
+                        <div class="empty-state">
+                            <span class="empty-icon">💾</span>
+                            <p>No saved prompts yet. Save your favorite optimized prompts for quick access!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Legal Section -->
+            <section class="section">
+                <h2>Legal & Support</h2>
+                <div class="card">
+                    <div class="legal-links">
+                        <a href="#" class="legal-link">Contact Us</a>
+                        <a href="#" class="legal-link">About Us</a>
+                        <a href="#" class="legal-link">Privacy Policy</a>
+                        <a href="#" class="legal-link">Terms of Service</a>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for adding/editing prompts -->
+    <div id="promptModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Prompt</h3>
+                <button type="button" id="closeModal" class="close-btn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="promptTitle">Title</label>
+                    <input type="text" id="promptTitle" placeholder="Enter prompt title">
+                </div>
+                <div class="form-group">
+                    <label for="promptContent">Prompt Content</label>
+                    <textarea id="promptContent" rows="6" placeholder="Enter your prompt content"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="cancelPrompt" class="btn-secondary">Cancel</button>
+                <button type="button" id="savePrompt" class="btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

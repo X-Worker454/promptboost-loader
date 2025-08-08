@@ -1,0 +1,27 @@
+name = "optimo-prompt-ai-backend"
+compatibility_date = "2024-01-01"
+main = "src/index.js"
+
+[env.production]
+name = "optimo-prompt-ai-backend"
+
+[env.development]
+name = "optimo-prompt-ai-backend-dev"
+
+# D1 Database binding
+[[d1_databases]]
+binding = "DB"
+database_name = "optimo_prompt_ai_db"
+database_id = "" # Will be populated after creating D1 database
+
+# Environment variables for production
+[env.production.vars]
+ENVIRONMENT = "production"
+PADDLE_WEBHOOK_SECRET = "" # Set in dashboard
+PADDLE_CLIENT_TOKEN = "" # Set in dashboard
+
+# Environment variables for development  
+[env.development.vars]
+ENVIRONMENT = "development"
+PADDLE_WEBHOOK_SECRET = "" # Set in dashboard
+PADDLE_CLIENT_TOKEN = "" # Set in dashboard
